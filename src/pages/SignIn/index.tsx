@@ -1,5 +1,5 @@
 import React, { useCallback, useRef } from 'react';
-import { Image, KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
+import { Image, KeyboardAvoidingView, Platform, ScrollView, TextInput, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/mobile';
@@ -14,6 +14,7 @@ import { Container, Title, ForgotPassword, ForgotPasswordText, CreateAccountButt
 const SignIn: React.FC = () => {
 
     const formRef = useRef<FormHandles>(null);
+    const passwordInputRef = useRef<TextInput>(null);
     const navigation = useNavigation();
 
     const handleSignIn = useCallback((data: object) => {
@@ -39,10 +40,31 @@ const SignIn: React.FC = () => {
                         </View>
 
                         <Form ref={formRef} onSubmit={handleSignIn}>
-                            <Input name="Email" icon="mail" placeholder="E-mail" />
-                            <Input name="Password" icon="lock" placeholder="Senha" />
+                            <Input
+                                autoCorrect={false}
+                                autoCapitalize="none"
+                                keyboardType="email-address"
+                                name="Email"
+                                icon="mail"
+                                placeholder="E-mail"
+                                returnKeyType="next"
+                                onSubmitEditing={()=>{
+                                    passwordInputRef.current?.focus();
+                                }}
+                            />
+                            <Input
+                                ref={passwordInputRef}
+                                name="Password"
+                                icon="lock"
+                                placeholder="Senha"
+                                secureTextEntry
+                                returnKeyType="send"
+                                onSubmitEditing={() =>
+                                    formRef.current?.submitForm()
+                                }
+                            />
 
-                            <Button onPress={() => 
+                            <Button onPress={() =>
                                 formRef.current?.submitForm()
                             }>
                                 Entrar
