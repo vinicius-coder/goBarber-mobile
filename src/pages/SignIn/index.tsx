@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, KeyboardAvoidingView, Platform, ScrollView, View } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
+import { useNavigation } from '@react-navigation/native';
 
 import logoImg from '../../assets/logo.png';
 import Input from '../../components/Input';
@@ -9,6 +10,9 @@ import Button from '../../components/Button';
 import { Container, Title, ForgotPassword, ForgotPasswordText, CreateAccountButton, CreateAccountButtonText } from './styles';
 
 const SignIn: React.FC = () => {
+
+    const navigation = useNavigation();
+
     return (
         <>
             <KeyboardAvoidingView
@@ -18,7 +22,7 @@ const SignIn: React.FC = () => {
             >
                 <ScrollView
                     keyboardShouldPersistTaps="handled"
-                    contentContainerStyle={{flex: 1}}
+                    contentContainerStyle={{ flex: 1 }}
                 >
                     <Container>
                         <Image source={logoImg} />
@@ -30,7 +34,7 @@ const SignIn: React.FC = () => {
                         <Input name="Email" icon="mail" placeholder="E-mail" />
                         <Input name="Password" icon="lock" placeholder="Senha" />
 
-                        <Button onPress={() => { console.log('ok') }}>Entrar</Button>
+                        <Button onPress={() => navigation.navigate('SignUp')}>Entrar</Button>
 
                         <ForgotPassword onPress={() => { }}>
                             <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
@@ -40,7 +44,7 @@ const SignIn: React.FC = () => {
                 </ScrollView>
             </KeyboardAvoidingView>
 
-            <CreateAccountButton onPress={() => { }}>
+            <CreateAccountButton onPress={() => navigation.navigate('SignUp')}>
                 <Icon
                     name="log-in"
                     size={20}
