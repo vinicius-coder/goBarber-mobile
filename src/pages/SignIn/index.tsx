@@ -13,6 +13,7 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 import { Container, Title, ForgotPassword, ForgotPasswordText, CreateAccountButton, CreateAccountButtonText } from './styles';
+import { useAuth } from '../../hooks/auth';
 
 interface SignInFormData {
     email: string;
@@ -20,11 +21,14 @@ interface SignInFormData {
 }
 
 const SignIn: React.FC = () => {
-
+    
     const formRef = useRef<FormHandles>(null);
     const passwordInputRef = useRef<TextInput>(null);
     const navigation = useNavigation();
-
+    
+    const { signIn, userDTO } = useAuth();
+    console.log(userDTO);
+    
     const handleSignIn = useCallback(async (data: SignInFormData) => {
         try {
             formRef.current?.setErrors({});
@@ -38,12 +42,13 @@ const SignIn: React.FC = () => {
                 abortEarly: false,
             });
 
-            /*await signIn({
+            await signIn({
                 email: data.email,
                 password: data.password,
             });
 
-            history.push('/dashboard');*/
+
+            //navigation.navigate('/dashboard');
 
         } catch (err) {
 
