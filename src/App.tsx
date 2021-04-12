@@ -3,7 +3,7 @@ import React from 'react'
 import AppProvider from './hooks';
 import { StatusBar, View } from 'react-native'
 
-import AuthRoutes from './routes';
+import AuthRoutes from './routes/index';
 import { NavigationContainer } from '@react-navigation/native';
 
 const App: React.FC = () => {
