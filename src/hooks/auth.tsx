@@ -61,7 +61,7 @@ const AuthProvider: React.FC = ({ children }) => {
 
         await AsyncStorage.multiRemove([
             '@GoBarber:token',
-            '@GoBarber:user'
+            '@GoBarber:user',
         ]);
 
         setData({} as AuthState);

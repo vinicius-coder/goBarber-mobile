@@ -26,8 +26,8 @@ const SignIn: React.FC = () => {
     const passwordInputRef = useRef<TextInput>(null);
     const navigation = useNavigation();
     
-    const { signIn, userDTO } = useAuth();
-    console.log(userDTO);
+    const { signIn, userDTO: user } = useAuth();
+    console.log(user);
     
     const handleSignIn = useCallback(async (data: SignInFormData) => {
         try {
@@ -46,8 +46,6 @@ const SignIn: React.FC = () => {
                 email: data.email,
                 password: data.password,
             });
-
-
             //navigation.navigate('/dashboard');
 
         } catch (err) {
@@ -91,7 +89,7 @@ const SignIn: React.FC = () => {
                                 autoCorrect={false}
                                 autoCapitalize="none"
                                 keyboardType="email-address"
-                                name="Email"
+                                name="email"
                                 icon="mail"
                                 placeholder="E-mail"
                                 returnKeyType="next"
@@ -101,7 +99,7 @@ const SignIn: React.FC = () => {
                             />
                             <Input
                                 ref={passwordInputRef}
-                                name="Password"
+                                name="password"
                                 icon="lock"
                                 placeholder="Senha"
                                 secureTextEntry
